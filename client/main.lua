@@ -106,14 +106,6 @@ AddEventHandler("qb-kfc:Storage", function ()
     })
 end)
 
-RegisterNetEvent('qb-kfc:pstash')
-AddEventHandler('qb-kfc:pstash', function()
-        TriggerServerEvent("inventory:server:OpenInventory", "stash", "mystash_"..QBCore.Functions.GetPlayerData().citizenid)
-        TriggerEvent("inventory:client:SetCurrentStash", "mystash_"..QBCore.Functions.GetPlayerData().citizenid {
-			maxweight = 250000,
-			slots = 20,
-		})
-end)
 
 --Meal Creations
 RegisterNetEvent("qb-kfc:BoxMeal")

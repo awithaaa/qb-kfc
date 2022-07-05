@@ -2,9 +2,9 @@ Config = {}
 
 Config.SQL = 'oxmysql' --- oxmysql or ghmattisql
 
-Config.Eye = "true" -- If you are using the QB Target then change this to true. IF FALSE it will show 3D text
+Config.Eye = "true" -- If you are using the QB Target then change this to true.
 
- Config.Locations = { -- You will need to add your own locations I added duty and pattys for testing 
+ Config.Locations = { 
     ["stations"] = {
         [1] = {label = ('KFC'), coords = vector4(341.14, -880.84, 29.34, 0.9)}
     }

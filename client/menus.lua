@@ -81,7 +81,7 @@ Citizen.CreateThread(function ()
                 {
                     event = "qb-kfc:PattyFry",
                     icon = "fas fa-hamburger",
-                    label = "Burger Cook Station 2",
+                    label = "Burger Cook Station",
                     job = "kfc",
                 },
             },
@@ -198,25 +198,6 @@ Citizen.CreateThread(function ()
                         },
                         distance = 1.5
                     })
-
-                    exports['qb-target']:AddBoxZone("personalstash",vector3(336.79, -896.45, 29.34), 5.5, 0.5,{
-                        name="personalstash",
-                        heading=0,
-                        debugPoly=false,
-                        minZ=26.54,
-                        maxZ=30.54,
-                    }, {
-                            options = {
-                                {
-                                    event = "qb-kfc:pstash",
-                                    icon = "fas fa-storage",
-                                    label = "Personal Stash",
-                                    job = "kfc",
-                                },
-                            },
-                            distance = 1.5
-                        })
-    
     
             exports['qb-target']:AddBoxZone("kfc_register_1", vector3(344.67, -884.21, 29.34), 0.5, 0.4, {
                 name="kfc_register_1",
