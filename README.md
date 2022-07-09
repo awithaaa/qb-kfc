@@ -1,6 +1,6 @@
 ## Preview
 
-[watch preview here]()
+[watch preview here](https://youtu.be/tQgWbud4rSw)
 
 ## Requirements
 QBCore Framework - [QBCORE GITHUB](https://github.com/qbcore-framework/qb-core)
