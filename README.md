@@ -9,7 +9,7 @@ PolyZone - [PolyZone GITHUB](https://github.com/mkafrin/PolyZone)
 
 qb-target - [QB Target github](https://github.com/BerkieBb/qb-target)
 
-Map - [KFC MLO]()
+Map - [KFC MLO](https://discord.com/channels/993769460353728512/993774460823933059/995900785609162834)
 
 ## Add the [images] in to your inventory
 
