@@ -99,3 +99,182 @@ QBCore.Functions.CreateUseableItem("kfc-boxmeal", function(source, item)
 end)
 
 
+
+RegisterNetEvent('qb-kfc:server:makeSoftDrink', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    Player.Functions.RemoveItem('kfc-sodasyrup',1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-sodasyrup"], "remove")
+    Player.Functions.AddItem('kfc-softdrink',1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-softdrink"], "add", 1)
+end)
+
+RegisterNetEvent('qb-kfc:server:makeMilkShake', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    Player.Functions.RemoveItem('kfc-mshakeformula',1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-mshakeformula"], "remove")
+    Player.Functions.AddItem('kfc-mshake',1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-mshake"], "add", 1)
+end)
+
+RegisterNetEvent('qb-kfc:server:makePatty', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    Player.Functions.RemoveItem('kfc-raw' ,1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-raw"], "remove")
+    Player.Functions.AddItem('kfc-meat', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-meat"], "add", 1)
+end)
+
+RegisterNetEvent('qb-kfc:server:makeFries', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    Player.Functions.RemoveItem('kfc-potato', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-potato"], "remove")
+    Player.Functions.AddItem('kfc-fries', 4)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-fries"], "add", 4)
+end)
+
+RegisterNetEvent('qb-kfc:server:makeVeggieBurger', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    Player.Functions.RemoveItem('kfc-tomato', 1)
+    Player.Functions.RemoveItem('kfc-lettuce', 1)
+    Player.Functions.RemoveItem('kfc-bun', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-tomato"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-lettuce"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-bun"], "remove")
+    Player.Functions.AddItem('kfc-veggieburger', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-veggieburger"], "add", 1)
+end)
+
+RegisterNetEvent('qb-kfc:server:makeHeartStopper', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    Player.Functions.RemoveItem('kfc-meat', 1)
+    Player.Functions.RemoveItem('kfc-lettuce', 1)
+    Player.Functions.RemoveItem('kfc-tomato', 1)
+    Player.Functions.RemoveItem('kfc-bun', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-meat"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-lettuce"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-tomato"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-bun"], "remove")
+    Player.Functions.AddItem('kfc-heartstopper', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-heartstopper"], "add", 1)
+end)
+
+RegisterNetEvent('qb-kfc:server:makeZingerBurger', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    Player.Functions.RemoveItem('kfc-meat', 1)
+    Player.Functions.RemoveItem('kfc-lettuce', 1)
+    Player.Functions.RemoveItem('kfc-tomato', 1)
+    Player.Functions.RemoveItem('kfc-bun', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-meat"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-lettuce"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-tomato"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-bun"], "remove")
+    Player.Functions.AddItem('kfc-zingerburger', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-zingerburger"], "add", 1)
+end)
+
+RegisterNetEvent('qb-kfc:server:makeSnacker', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    Player.Functions.RemoveItem('kfc-meat', 1)
+    Player.Functions.RemoveItem('kfc-lettuce', 1)
+    Player.Functions.RemoveItem('kfc-tomato', 1)
+    Player.Functions.RemoveItem('kfc-bun', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-meat"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-lettuce"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-tomato"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-bun"], "remove")
+    Player.Functions.AddItem('kfc-snacker', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-snacker"], "add", 1)
+end)
+
+RegisterNetEvent('qb-kfc:server:makeSubmarine', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    Player.Functions.RemoveItem('kfc-meat', 1)
+    Player.Functions.RemoveItem('kfc-bun', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-meat"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-bun"], "remove")
+    Player.Functions.AddItem('kfc-submarine', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-submarine"], "add", 1)
+end)
+
+
+RegisterNetEvent('qb-kfc:server:makeBoxMeal', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    local randomToy = math.random(1,10)
+
+    Player.Functions.RemoveItem('kfc-fries', 1)
+    Player.Functions.RemoveItem('kfc-heartstopper', 1)
+    Player.Functions.RemoveItem('kfc-softdrink', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-fries"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-heartstopper"], "remove")
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-softdrink"], "remove")
+
+    Player.Functions.AddItem('kfc-boxmeal', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-boxmeal"], "add", 1)
+
+    if randomToy < 4 then
+        QBCore.Functions.Notify("No Free Item in Box Looool", "error")
+    elseif randomToy == 4 then
+        Player.Functions.AddItem('kfc-snacker', 1)
+        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-snacker"], "add", 1)
+    elseif randomToy < 10 and randomToy > 4 then
+        QBCore.Functions.Notify("No toy in Box Looool", "error")
+    elseif randomToy == 10 then
+        Player.Functions.AddItem('kfc-submarine', 1)
+        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-submarine"], "add", 1)
+    else
+        QBCore.Functions.Notify("No toy in Box Looool", "error")
+    end
+
+end)
+
+RegisterNetEvent('qb-kfc:server:boxMeal', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    local randomToy = math.random(1,10)
+
+    Player.Functions.RemoveItem('kfc-boxmeal', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-boxmeal"], "remove")
+
+    Player.Functions.AddItem('kfc-heartstopper', 1)
+    Player.Functions.AddItem('kfc-softdrink', 1)
+    Player.Functions.AddItem('kfc-fries', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-heartstopper"], "add", 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-softdrink"], "add", 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-fries"], "add", 1)
+
+    if randomToy < 4 then
+        QBCore.Functions.Notify("No Free Item in Box Looool", "error")
+    elseif randomToy == 4 then
+        Player.Functions.AddItem('kfc-snacker', 1)
+        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-snacker"], "add", 1)
+    elseif randomToy < 10 and randomToy > 4 then
+        QBCore.Functions.Notify("No toy in Box Looool", "error")
+    elseif randomToy == 10 then
+        Player.Functions.AddItem('kfc-submarine', 1)
+        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["kfc-submarine"], "add", 1)
+    else
+        QBCore.Functions.Notify("No toy in Box Looool", "error")
+    end
+
+end)

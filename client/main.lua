@@ -2,7 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 isLoggedIn = false
 PlayerJob = {}
 
-local onDuty = false
+local onDuty = true
 
 function DrawText3Ds(x, y, z, text)
     SetTextScale(0.35, 0.35)
@@ -24,11 +24,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function ()
     QBCore.Functions.GetPlayerData(function (PlayerData)
         PlayerJob = PlayerData.job
-        if PlayerData.job.onduty then
-            if PlayerData.job.name == "kfc" then
-                TriggerServerEvent("QBCore:ToggleDuty")
-            end
-        end
+		if PlayerData.job.onduty then if PlayerData.job.name == "kfc" then TriggerServerEvent("QBCore:ToggleDuty") end end
     end)
 end)
 
@@ -44,6 +40,7 @@ AddEventHandler('QBCore:Client:SetDuty', function(duty)
 end)
 
 CreateThread(function()
+	QBCore.Functions.Notify("You are now on duty at KFC", "success")
     for k, station in pairs(Config.Locations["stations"]) do
         local blip = AddBlipForCoord(station.coords.x, station.coords.y, station.coords.z)
         SetBlipSprite(blip, 674)
@@ -110,27 +107,7 @@ end)
 --Meal Creations
 RegisterNetEvent("qb-kfc:BoxMeal")
 AddEventHandler("qb-kfc:BoxMeal", function()
-		local randomToy = math.random(1,10)
-		--remove box
-		TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-boxmeal", 1)
-		--add items from box
-		TriggerServerEvent('QBCore:Server:AddItem', "kfc-heartstopper", 1)
-		TriggerServerEvent('QBCore:Server:AddItem', "kfc-softdrink", 1)
-		TriggerServerEvent('QBCore:Server:AddItem', "kfc-fries", 1)
-
-		if randomToy < 4 then
-			QBCore.Functions.Notify("No Free Item in Box Looool", "error")
-		elseif randomToy == 4 then
-			TriggerServerEvent('QBCore:Server:AddItem', "kfc-snacker", 1)
-            		TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-snacker"], "add")
-		elseif randomToy < 10 and randomToy > 4 then
-			QBCore.Functions.Notify("No toy in Box Looool", "error")
-		elseif randomToy == 10 then
-			TriggerServerEvent('QBCore:Server:AddItem', "kfc-submarine", 1)
-            		TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-submarine"], "add")
-		else
-            		QBCore.Functions.Notify("No toy in Box Looool", "error")
-        	end
+	TriggerServerEvent('qb-kfc:server:boxMeal')
 end)
 
 RegisterNetEvent("qb-kfc:CreateBoxMeal")
@@ -148,12 +125,8 @@ AddEventHandler("qb-kfc:CreateBoxMeal", function()
 					anim = "givetake1_a",
 					flags = 8,
 				}, {}, {}, function() -- Done
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-fries", 1)
-                    			TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-heartstopper", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-softdrink", 1)
-					TriggerServerEvent('QBCore:Server:AddItem', "kfc-boxmeal", 1)
-                    			TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-boxmeal"], "add")
-                    			QBCore.Functions.Notify("You made a A Box Meal", "success")
+					TriggerServerEvent('qb-kfc:server:makeBoxMeal')
+					QBCore.Functions.Notify("You made a A Box Meal", "success")
 				end, function()
 					QBCore.Functions.Notify("Cancelled..", "error")
 				end)
@@ -181,13 +154,8 @@ AddEventHandler("qb-kfc:SnackerBurger", function()
 					anim = "givetake1_a",
 					flags = 8,
 				}, {}, {}, function() -- Done
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-meat", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-lettuce", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-bun", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-tomato", 1)
-					TriggerServerEvent('QBCore:Server:AddItem', "kfc-snacker", 1)
-                    			TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-snacker"], "add")
-                    			QBCore.Functions.Notify("You made a Snacker Burger", "success")
+					TriggerServerEvent('qb-kfc:server:makeSnacker')
+					QBCore.Functions.Notify("You made a Snacker Burger", "success")
 				end, function()
 					QBCore.Functions.Notify("Cancelled..", "error")
 				end)
@@ -215,13 +183,8 @@ AddEventHandler("qb-kfc:ZingerBurger", function()
 					anim = "givetake1_a",
 					flags = 8,
 				}, {}, {}, function() -- Done
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-meat", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-lettuce", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-bun", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-tomato", 1)
-					TriggerServerEvent('QBCore:Server:AddItem', "kfc-zingerburger", 1)
-                    			TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-zingerburger"], "add")
-                    			QBCore.Functions.Notify("You made a Zinger Burger", "success")
+					TriggerServerEvent('qb-kfc:server:makeZingerBurger')
+					QBCore.Functions.Notify("You made a Zinger Burger", "success")
 				end, function()
 					QBCore.Functions.Notify("Cancelled..", "error")
 				end)
@@ -249,13 +212,8 @@ AddEventHandler("qb-kfc:HeartStopper", function()
 					anim = "givetake1_a",
 					flags = 8,
 				}, {}, {}, function() -- Done
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-meat", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-lettuce", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-bun", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-tomato", 1)
-					TriggerServerEvent('QBCore:Server:AddItem', "kfc-heartstopper", 1)
-                    			TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-heartstopper"], "add")
-                    			QBCore.Functions.Notify("You made a Heart Stopper", "success")
+					TriggerServerEvent('qb-kfc:server:makeHeartStopper')
+					QBCore.Functions.Notify("You made a Heart Stopper", "success")
 				end, function()
 					QBCore.Functions.Notify("Cancelled..", "error")
 				end)
@@ -284,11 +242,8 @@ AddEventHandler("qb-kfc:Submarine", function()
 					anim = "givetake1_a",
 					flags = 8,
 				}, {}, {}, function() -- Done
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-meat", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-bun", 1)
-					TriggerServerEvent('QBCore:Server:AddItem', "kfc-submarine", 1)
-                    			TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-submarine"], "add")
-                    			QBCore.Functions.Notify("You made a Submarine Roll", "success")
+					TriggerServerEvent('qb-kfc:server:makeSubmarine')
+					QBCore.Functions.Notify("You made a Submarine Roll", "success")
 				end, function()
 					QBCore.Functions.Notify("Cancelled..", "error")
 				end)
@@ -316,12 +271,8 @@ AddEventHandler("qb-kfc:veggieburger", function()
 					anim = "givetake1_a",
 					flags = 8,
 				}, {}, {}, function() -- Done
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-tomato", 1)
-                    			TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-lettuce", 1)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-bun", 1)
-					TriggerServerEvent('QBCore:Server:AddItem', "kfc-veggieburger", 1)
-                    			TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-veggieburger"], "add")
-                   			QBCore.Functions.Notify("You made a Meat Free Burger", "success")
+					TriggerServerEvent('qb-kfc:server:makeVeggieBurger')
+                   	QBCore.Functions.Notify("You made a Meat Free Burger", "success")
 				end, function()
 					QBCore.Functions.Notify("Cancelled..", "error")
 				end)
@@ -399,7 +350,6 @@ end)
 
 -- Functions --
 function MakeFries()
-	TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-potato", 1)
 	QBCore.Functions.Progressbar("pickup", "Frying the fries..", 4000, false, true, {
 	    disableMovement = true,
 	    disableCarMovement = true,
@@ -417,15 +367,13 @@ function MakeFries()
 	    }
 	)
 	Citizen.Wait(4000)
-	TriggerServerEvent('QBCore:Server:AddItem', "kfc-fries", 4)
-	TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-fries"], "add")
+	TriggerServerEvent('qb-kfc:server:makeFries')
 	QBCore.Functions.Notify("You made 4 fries", "success")
 	StopAnimTask(PlayerPedId(), "amb@prop_human_bbq@male@base", "base", 1.0)
 end
 
 
 function MakePatty()
-    TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-raw", 1)
     QBCore.Functions.Progressbar("pickup", "Cooking the Patty..", 4000, false, true, {
         disableMovement = true,
         disableCarMovement = true,
@@ -443,14 +391,12 @@ function MakePatty()
     }    
 )
     Citizen.Wait(4000)
-    TriggerServerEvent('QBCore:Server:AddItem', "kfc-meat", 1)
-    TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-meat"], "add")
+	TriggerServerEvent('qb-kfc:server:makePatty')
     QBCore.Functions.Notify("You cooked the meat", "success")
     StopAnimTask(PlayerPedId(), "amb@prop_human_bbq@male@base", "base", 1.0)
 end
 
 function MakeSoftDrink()
-    TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-sodasyrup", 1)
     QBCore.Functions.Progressbar("pickup", "Filling a cup..", 4000, false, true, {
         disableMovement = true,
         disableCarMovement = false,
@@ -458,14 +404,12 @@ function MakeSoftDrink()
         disableCombat = false,
     })
     Citizen.Wait(4000)
-    TriggerServerEvent('QBCore:Server:AddItem', "kfc-softdrink", 1)
-    TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-softdrink"], "add")
+	TriggerServerEvent('qb-kfc:server:makeSoftDrink')
     QBCore.Functions.Notify("You made a Soda", "success")
 end  
 
 
 function MakeMShake()
-    TriggerServerEvent('QBCore:Server:RemoveItem', "kfc-mshakeformula", 1)
     QBCore.Functions.Progressbar("pickup", "Filling up a cup..", 4000, false, true, {
         disableMovement = true,
         disableCarMovement = false,
@@ -473,8 +417,7 @@ function MakeMShake()
         disableCombat = false,
     })
     Citizen.Wait(4000)
-    TriggerServerEvent('QBCore:Server:AddItem', "kfc-mshake", 1)
-    TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kfc-mshake"], "add")
+	TriggerServerEvent('qb-kfc:server:makeMilkShake')
     QBCore.Functions.Notify("You made a Milkshake", "success")
 end  
    
