@@ -2,7 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 isLoggedIn = false
 PlayerJob = {}
 
-local onDuty = true
+local onDuty = false
 
 function DrawText3Ds(x, y, z, text)
     SetTextScale(0.35, 0.35)
@@ -23,8 +23,12 @@ end
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function ()
     QBCore.Functions.GetPlayerData(function (PlayerData)
-        PlayerJob = PlayerData.job
-		if PlayerData.job.onduty then if PlayerData.job.name == "kfc" then TriggerServerEvent("QBCore:ToggleDuty") end end
+      PlayerJob = PlayerData.job
+			if PlayerData.job.onduty then
+				if PlayerData.job.name == "kfc" then
+					TriggerServerEvent("QBCore:ToggleDuty") 
+				end
+			end
     end)
 end)
 
@@ -40,7 +44,6 @@ AddEventHandler('QBCore:Client:SetDuty', function(duty)
 end)
 
 CreateThread(function()
-	QBCore.Functions.Notify("You are now on duty at KFC", "success")
     for k, station in pairs(Config.Locations["stations"]) do
         local blip = AddBlipForCoord(station.coords.x, station.coords.y, station.coords.z)
         SetBlipSprite(blip, 674)
@@ -272,7 +275,7 @@ AddEventHandler("qb-kfc:veggieburger", function()
 					flags = 8,
 				}, {}, {}, function() -- Done
 					TriggerServerEvent('qb-kfc:server:makeVeggieBurger')
-                   	QBCore.Functions.Notify("You made a Meat Free Burger", "success")
+          QBCore.Functions.Notify("You made a Meat Free Burger", "success")
 				end, function()
 					QBCore.Functions.Notify("Cancelled..", "error")
 				end)
@@ -292,9 +295,9 @@ AddEventHandler("qb-kfc:SoftDrink", function()
     if onDuty then
     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
         if HasItem then
-           MakeSoftDrink()
+          MakeSoftDrink()
         else
-            QBCore.Functions.Notify("You don't have any soda syrup..", "error")
+        	QBCore.Functions.Notify("You don't have any soda syrup..", "error")
         end
       end, 'kfc-sodasyrup')
     else
@@ -322,9 +325,9 @@ AddEventHandler("qb-kfc:Fries", function()
     if onDuty then
     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
         if HasItem then
-           MakeFries()
+          MakeFries()
         else
-            QBCore.Functions.Notify("You don't have any potatoes..", "error")
+          QBCore.Functions.Notify("You don't have any potatoes..", "error")
         end
       end, 'kfc-potato')
     else
@@ -338,9 +341,9 @@ AddEventHandler("qb-kfc:PattyFry", function()
     if onDuty then
     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
         if HasItem then
-           MakePatty()
+          MakePatty()
         else
-            QBCore.Functions.Notify("You don't have any raw patties..", "error", 5000)
+          QBCore.Functions.Notify("You don't have any raw patties..", "error", 5000)
         end
       end, 'kfc-raw')
     else
@@ -390,35 +393,35 @@ function MakePatty()
         rotation = vector3(175.0, 160.0, 0.0),
     }    
 )
-    Citizen.Wait(4000)
+  Citizen.Wait(4000)
 	TriggerServerEvent('qb-kfc:server:makePatty')
-    QBCore.Functions.Notify("You cooked the meat", "success")
-    StopAnimTask(PlayerPedId(), "amb@prop_human_bbq@male@base", "base", 1.0)
+  QBCore.Functions.Notify("You cooked the meat", "success")
+  StopAnimTask(PlayerPedId(), "amb@prop_human_bbq@male@base", "base", 1.0)
 end
 
 function MakeSoftDrink()
-    QBCore.Functions.Progressbar("pickup", "Filling a cup..", 4000, false, true, {
-        disableMovement = true,
-        disableCarMovement = false,
-        disableMouse = false,
-        disableCombat = false,
-    })
-    Citizen.Wait(4000)
+	QBCore.Functions.Progressbar("pickup", "Filling a cup..", 4000, false, true, {
+			disableMovement = true,
+			disableCarMovement = false,
+			disableMouse = false,
+			disableCombat = false,
+	})
+	Citizen.Wait(4000)
 	TriggerServerEvent('qb-kfc:server:makeSoftDrink')
-    QBCore.Functions.Notify("You made a Soda", "success")
+	QBCore.Functions.Notify("You made a Soda", "success")
 end  
 
 
 function MakeMShake()
-    QBCore.Functions.Progressbar("pickup", "Filling up a cup..", 4000, false, true, {
-        disableMovement = true,
-        disableCarMovement = false,
-        disableMouse = false,
-        disableCombat = false,
-    })
-    Citizen.Wait(4000)
+	QBCore.Functions.Progressbar("pickup", "Filling up a cup..", 4000, false, true, {
+			disableMovement = true,
+			disableCarMovement = false,
+			disableMouse = false,
+			disableCombat = false,
+	})
+	Citizen.Wait(4000)
 	TriggerServerEvent('qb-kfc:server:makeMilkShake')
-    QBCore.Functions.Notify("You made a Milkshake", "success")
+	QBCore.Functions.Notify("You made a Milkshake", "success")
 end  
    
 RegisterNetEvent("qb-kfc:shop")
