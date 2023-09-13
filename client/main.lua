@@ -44,6 +44,7 @@ AddEventHandler('QBCore:Client:SetDuty', function(duty)
 end)
 
 CreateThread(function()
+    QBCore.Functions.Notify("You are now on duty at KFC", "success")
     for k, station in pairs(Config.Locations["stations"]) do
         local blip = AddBlipForCoord(station.coords.x, station.coords.y, station.coords.z)
         SetBlipSprite(blip, 674)
